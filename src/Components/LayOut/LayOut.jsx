@@ -16,7 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { alpha, useTheme } from "@mui/material/styles";
 import styled from "@emotion/styled";
 import InputBase from "@mui/material/InputBase";
@@ -39,16 +39,20 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { Avatar } from "@mui/material";
+import { useState } from "react";
+import { Margin } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
 const LayOut = ({ window, mode, setMode }) => {
+  const [isActive, setIsActive] = useState(false);
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const toggleTheme = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
-
+  const appTheme = useTheme();
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -104,27 +108,45 @@ const LayOut = ({ window, mode, setMode }) => {
   }));
 
   const array1 = [
-    { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/dashboard" },
-    { text: "Manage Team", icon: <PeopleOutlinedIcon />, path: "/team" },
     {
+      id: 1,
+      text: "Dashboard",
+      icon: <HomeOutlinedIcon />,
+      path: "/dashboard",
+    },
+    { id: 2, text: "Manage Team", icon: <PeopleOutlinedIcon />, path: "/team" },
+    {
+      id: 3,
       text: "Contacts Info",
       icon: <ContactsOutlinedIcon />,
       path: "/contacts",
     },
     {
+      id: 4,
       text: "Invoices Balances",
       icon: <ReceiptOutlinedIcon />,
       path: "/invoices",
     },
   ];
   const Array2 = [
-    { text: "Profile Form", icon: <Person4OutlinedIcon />, path: "/form" },
     {
+      id: 5,
+      text: "Profile Form",
+      icon: <Person4OutlinedIcon />,
+      path: "/form",
+    },
+    {
+      id: 6,
       text: "Calendar",
       icon: <CalendarTodayOutlinedIcon />,
       path: "/calendar",
     },
-    { text: "FAQ Page", icon: <HelpOutlineOutlinedIcon />, path: "/faq" },
+    {
+      id: 7,
+      text: "FAQ Page",
+      icon: <HelpOutlineOutlinedIcon />,
+      path: "/faq",
+    },
   ];
   const Array3 = [
     { text: "Bar Chart", icon: <BarChartOutlinedIcon />, path: "/bar" },
@@ -132,14 +154,33 @@ const LayOut = ({ window, mode, setMode }) => {
     { text: "Line Chart", icon: <TimelineOutlinedIcon />, path: "/line" },
     { text: "Geography Chart", icon: <MapOutlinedIcon />, path: "/geography" },
   ];
+  const activeStyles = {
+    backgroundColor: appTheme.palette.primary.main,
+    color: appTheme.palette.primary.contrastText,
+    borderRadius: 2,
+    "&:hover": {
+      backgroundColor: appTheme.palette.primary.dark,
+    },
+    transition: "0.3s",
+  };
+
   // 📦 القائمة الجانبية
   const drawer = (
     <div>
       <Divider />
       <List>
         {array1.map((text, index) => (
-          <ListItem key={text.path} disablePadding>
-            <ListItemButton >
+          <ListItem
+            key={text.path}
+            disablePadding
+            onClick={() => {
+              navigate(text.path);
+              setIsActive(text.id);
+            }}
+          >
+            <ListItemButton
+              sx={{ ...(isActive === text.id ? activeStyles : {}) }}
+            >
               <ListItemIcon>{text.icon}</ListItemIcon>
               <ListItemText primary={text.text} />
             </ListItemButton>
@@ -149,8 +190,17 @@ const LayOut = ({ window, mode, setMode }) => {
       <Divider />
       <List>
         {Array2.map((text) => (
-          <ListItem key={text.path} disablePadding>
-            <ListItemButton>
+          <ListItem
+            key={text.path}
+            disablePadding
+            onClick={() => {
+              navigate(text.path);
+              setIsActive(text.id);
+            }}
+          >
+            <ListItemButton
+              sx={{ ...(isActive === text.id ? activeStyles : {}) }}
+            >
               <ListItemIcon>{text.icon}</ListItemIcon>
               <ListItemText primary={text.text} />
             </ListItemButton>
@@ -160,8 +210,17 @@ const LayOut = ({ window, mode, setMode }) => {
       <Divider />
       <List>
         {Array3.map((text) => (
-          <ListItem key={text.path} disablePadding>
-            <ListItemButton>
+          <ListItem
+            key={text.path}
+            disablePadding
+            onClick={() => {
+              navigate(text.path);
+              setIsActive(text.path);
+            }}
+          >
+            <ListItemButton
+              sx={{ ...(isActive === text.path ? activeStyles : {}) }}
+            >
               <ListItemIcon>{text.icon}</ListItemIcon>
               <ListItemText primary={text.text} />
             </ListItemButton>
@@ -242,7 +301,7 @@ const LayOut = ({ window, mode, setMode }) => {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                paddingTop:2
+                paddingTop: 2,
               },
             }}
             slotProps={{
@@ -277,11 +336,20 @@ const LayOut = ({ window, mode, setMode }) => {
                 paddingBlock: 2,
               }}
             >
-              <Avatar alt="Asmaa " src="/static/images/avatar/1.jpg"  sx={{ width: 50, height: 50 }} />
+              <Avatar
+                alt="Asmaa "
+                src="/static/images/avatar/1.jpg"
+                sx={{ width: 50, height: 50 }}
+              />
               <Typography variant="body1" noWrap component="p">
                 Asmaa
               </Typography>
-              <Typography variant="body2" noWrap component="p">
+              <Typography
+                variant="body2"
+                noWrap
+                component="p"
+                sx={{ color: appTheme.palette.secondary.main }}
+              >
                 Developer
               </Typography>
             </Box>
@@ -300,7 +368,6 @@ const LayOut = ({ window, mode, setMode }) => {
         >
           <Toolbar />
           <div>
-            content goes here
             <Outlet />
           </div>
         </Box>
