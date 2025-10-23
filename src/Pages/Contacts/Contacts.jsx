@@ -1,5 +1,4 @@
-import { Box } from "@mui/material";
-import clsx from "clsx";
+import { Box, Typography, useTheme } from "@mui/material";
 import {
   DataGrid,
   Toolbar,
@@ -10,11 +9,10 @@ import {
   ExportPrint,
   QuickFilter,
   QuickFilterControl,
-  QuickFilterClear,
   QuickFilterTrigger,
 } from "@mui/x-data-grid";
 import SearchIcon from "@mui/icons-material/Search";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { Input } from "@mui/material";
 import { Button as MuiButton } from "@mui/material";
 
 export const rows = [
@@ -207,88 +205,92 @@ const columns = [
   },
 ];
 
-function Button(props) {
-  return (
-    <button
-      type="button"
-      {...props}
-      className={clsx(
-        "flex h-9 items-center justify-center rounded border border-neutral-200 cursor-pointer dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 px-2.5 text-sm font-bold text-neutral-700 dark:text-neutral-200 whitespace-nowrap select-none hover:bg-neutral-100 dark:hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-600 active:bg-neutral-100 dark:active:bg-neutral-700",
-        props.className
-      )}
-    />
-  );
-}
-
-function TextInput(props) {
-  return (
-    <input
-      {...props}
-      className={clsx(
-        "h-9 w-full rounded border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 px-2.5 text-base text-neutral-900 dark:text-neutral-200 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600",
-        props.className
-      )}
-    />
-  );
-}
-
 function CustomToolbar() {
+  const appTheme = useTheme();
+  const buttonStyle = {
+    textTransform: "none",
+    borderRadius: "8px",
+    fontWeight: 500,
+    height: 36,
+    minWidth: 90,
+    color: "#fff",
+    marginInline: "5px",
+    backgroundColor: appTheme.palette.primary.main,
+    "&:hover": {
+      backgroundColor: appTheme.palette.primary.dark,
+    },
+  };
+  const inputStyle = {
+    width: "100%",
+    padding: "0 12px",
+    fontSize: "14px",
+    color: appTheme.palette.primary.main,
+    backgroundColor: appTheme.palette.background.paper,
+    border: "none",
+    borderRadius: "8px",
+    outline: "none",
+
+    "&:focus": {
+      border: "none",
+    },
+  };
   return (
-    <Toolbar style={{backgroundColor:"red",display:"flex",justifyContent:"flex-start" }}>
-      <ColumnsPanelTrigger 
-        render={<ToolbarButton render={<Button>Columns</Button>} />}
+    <Toolbar style={{ display: "flex", justifyContent: "flex-start" }}>
+      <ColumnsPanelTrigger
+        render={
+          <ToolbarButton
+            render={<MuiButton sx={buttonStyle}>Columns</MuiButton>}
+          />
+        }
       />
       <FilterPanelTrigger
-        render={<ToolbarButton render={<Button>Filter</Button>} />}
+        render={
+          <ToolbarButton
+            render={<MuiButton sx={buttonStyle}>Filter</MuiButton>}
+          />
+        }
       />
-      <ExportCsv render={<ToolbarButton render={<Button>Export</Button>} />} />
-      <ExportPrint render={<ToolbarButton render={<Button>Print</Button>} />} />
+      <ExportCsv
+        render={
+          <ToolbarButton
+            render={<MuiButton sx={buttonStyle}>Export</MuiButton>}
+          />
+        }
+      />
+      <ExportPrint
+        render={
+          <ToolbarButton
+            render={<MuiButton sx={buttonStyle}>Print</MuiButton>}
+          />
+        }
+      />
       <QuickFilter
-        render={(props, state) => (
-          <div {...props} className="ml-auto flex overflow-clip">
+        render={() => (
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <QuickFilterTrigger
-              className={state.expanded ? "rounded-r-none border-r-0" : ""}
               render={
                 <ToolbarButton
                   render={
-                    <Button aria-label="Search">
-                      <SearchIcon fontSize="small" />
-                    </Button>
+                    <MuiButton aria-label="Search">
+                      <SearchIcon
+                        sx={{ marginRight: "-40px" }}
+                        fontSize="small"
+                      />
+                    </MuiButton>
                   }
                 />
               }
             />
-            <div
-              className={clsx(
-                "flex overflow-clip transition-all duration-300 ease-in-out",
-                state.expanded ? "w-48" : "w-0"
-              )}
-            >
+            <div>
               <QuickFilterControl
                 aria-label="Search"
                 placeholder="Search"
-                render={({ slotProps, size, ...controlProps }) => (
-                  <TextInput
-                    {...controlProps}
-                    {...slotProps?.htmlInput}
-                    className={clsx(
-                      "flex-1 rounded-l-none",
-                      state.expanded && state.value !== "" && "rounded-r-none"
-                    )}
-                  />
+                render={() => (
+                  <Input type="search" placeholder="Search.." sx={inputStyle} />
                 )}
               />
-              {state.expanded && state.value !== "" && (
-                <QuickFilterClear
-                  render={
-                    <Button aria-label="Clear" className="rounded-l-none">
-                      <CancelIcon fontSize="small" />
-                    </Button>
-                  }
-                />
-              )}
             </div>
-          </div>
+          </Box>
         )}
       />
     </Toolbar>
@@ -296,9 +298,24 @@ function CustomToolbar() {
 }
 
 const Contacts = () => {
+  const appTheme = useTheme();
   return (
     <>
-      <Box sx={{ height: 700, width: "100%", overflowX: "auto" }}>
+      <Box sx={{ height: "auto", width: "100%", mb: 4 }}>
+        <Typography
+          variant="h5"
+          fontWeight={600}
+          sx={{ color: appTheme.palette.secondary.main }}
+        >
+          Contacts
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{ color: appTheme.palette.text.secondary }}
+          mb={2}
+        >
+          List of contacts for future reference
+        </Typography>
         <DataGrid
           slots={{ toolbar: CustomToolbar }}
           showToolbar

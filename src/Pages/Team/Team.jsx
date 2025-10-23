@@ -2,7 +2,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 const rows = [
   {
     id: 1,
@@ -159,9 +159,13 @@ const columns = [
   },
 ];
 const Team = () => {
+  const appTheme = useTheme();
   return (
     <Box sx={{ height: 700, width: "100%", p: 2, overflowX: "auto" }}>
       {" "}
+      <Typography mb={2} variant="h5" color={appTheme.palette.secondary.main}>
+        Team
+      </Typography>
       <DataGrid rows={rows} columns={columns} />{" "}
     </Box>
   );

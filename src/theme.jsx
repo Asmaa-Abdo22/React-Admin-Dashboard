@@ -4,45 +4,49 @@ export const getDesignTokens = (mode) => ({
     ...(mode === "light"
       ? {
           primary: {
-            main: "#5066A3", 
-            light: "#6F82BB", 
+            main: "#5066A3",
+            light: "#6F82BB",
             dark: "#384C82",
             contrastText: "#ffffff",
           },
           secondary: {
-            main: "#d1b308", 
-            contrastText: "#1A2759",
+            main: "#E85D8C", 
+            light: "#F18FB1",
+            dark: "#C43E6D",
+            contrastText: "#ffffff",
           },
           background: {
-            default: "#FAFBFF", 
+            default: "#FFF9FB",
             paper: "#FFFFFF",
           },
           text: {
-            primary: "#24315E", 
-            secondary: "#5A648E", 
+            primary: "#24315E",
+            secondary: "#7A5772",
           },
-          divider: "#E7EAF5", 
+          divider: "#F3DCE6",
         }
       : {
           primary: {
-            main: "#7E92CC", 
+            main: "#7E92CC",
             light: "#9DACE0",
             dark: "#5A6BA6",
             contrastText: "#FFFFFF",
           },
           secondary: {
-            main: "#FFEA9E", 
+            main: "#FF7DAE",
+            light: "#FF9EC2",
+            dark: "#E0528C",
             contrastText: "#0B1D51",
           },
           background: {
-            default: "#141A33", 
-            paper: "#1B2245",
+            default: "#1A1B3A",
+            paper: "#24264F",
           },
           text: {
-            primary: "#F3F5FF",
-            secondary: "#C5C9E6",
+            primary: "#F5E9F0",
+            secondary: "#D7BBD2",
           },
-          divider: "#2B3564",
+          divider: "#3A3C6A",
         }),
   },
   typography: {
