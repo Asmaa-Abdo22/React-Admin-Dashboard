@@ -2,7 +2,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { getNevoTheme } from "./nivoTheme";
 
-const BarChart = () => {
+const BarChart = ({ isDashboard }) => {
   const appTheme = useTheme();
   const nevotheme = getNevoTheme(appTheme);
   const data = [
@@ -31,18 +31,24 @@ const BarChart = () => {
 
   return (
     <>
-      <Typography variant="h5" color={appTheme.palette.secondary.main}>
-        Bar Chart
-      </Typography>
-      <Typography
-        variant="body2"
-        mb={3}
-        color={appTheme.palette.text.secondary}
-      >
-        The minimum wage in Germany, France and Spain (EUR/month)
-      </Typography>
+      {isDashboard ? (
+        ""
+      ) : (
+        <>
+          <Typography variant="h5" color={appTheme.palette.secondary.main}>
+            Bar Chart
+          </Typography>
+          <Typography
+            variant="body2"
+            mb={3}
+            color={appTheme.palette.text.secondary}
+          >
+            The minimum wage in Germany, France and Spain (EUR/month)
+          </Typography>
+        </>
+      )}
 
-      <Box sx={{ height: 400 }}>
+      <Box height={isDashboard ? 400 : 500}>
         <ResponsiveBar
           data={data}
           keys={["wage", "housing", "food", "transport"]}
@@ -60,7 +66,7 @@ const BarChart = () => {
             legendOffset: 32,
           }}
           axisLeft={{
-            legend: "EUR / month",
+            legend: isDashboard ? " " : "EUR / month",
             legendPosition: "middle",
             legendOffset: -55,
           }}

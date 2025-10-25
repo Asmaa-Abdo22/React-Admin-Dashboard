@@ -38,7 +38,7 @@ const ReuseableCard = ({ icon, text1, subtitle, scheme, chartTitle }) => {
     <>
       <Paper
         sx={{
-          minWidth: "300px",
+          minWidth: "290px",
           display: "flex",
           justifyContent: "space-between",
           padding: 1,

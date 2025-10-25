@@ -166,6 +166,13 @@ const Team = () => {
       <Typography mb={2} variant="h5" color={appTheme.palette.secondary.main}>
         Team
       </Typography>
+      <Typography
+            variant="body2"
+            mb={5}
+            color={appTheme.palette.text.secondary}
+          >
+            Meeting The Team Members
+          </Typography>
       <DataGrid rows={rows} columns={columns} />{" "}
     </Box>
   );

@@ -3,7 +3,7 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { getNevoTheme } from "../BarChart/nivoTheme";
 import { worldCountries } from "./world_countries.js";
 
-const Geography = () => {
+const Geography = ({ isDashboard }) => {
   const appTheme = useTheme();
   const nivoTheme = getNevoTheme(appTheme);
   const data = [
@@ -694,18 +694,24 @@ const Geography = () => {
   ];
   return (
     <>
-      <Typography variant="h5" color={appTheme.palette.secondary.main}>
-        Geography Chart
-      </Typography>
-      <Typography
-        variant="body2"
-        mb={5}
-        color={appTheme.palette.text.secondary}
-      >
-        Simple Geography Chart Example
-      </Typography>
+      {isDashboard ? (
+        ""
+      ) : (
+        <>
+          <Typography variant="h5" color={appTheme.palette.secondary.main}>
+            Geography Chart
+          </Typography>
+          <Typography
+            variant="body2"
+            mb={5}
+            color={appTheme.palette.text.secondary}
+          >
+            Simple Geography Chart Example
+          </Typography>
+        </>
+      )}
       <Box
-        height={500}
+        height={isDashboard ? 390 : 500}
         sx={{
           border: `1px solid ${appTheme.palette.divider}`,
           padding: 3,
@@ -725,24 +731,28 @@ const Geography = () => {
           enableGraticule={false}
           graticuleLineColor="#dddddd"
           borderWidth={0.5}
-          legends={[
-            {
-              anchor: "bottom-left",
-              direction: "column",
-              justify: true,
-              translateX: 20,
-              translateY: -20,
-              itemsSpacing: 0,
-              itemWidth: 94,
-              itemHeight: 18,
-              itemDirection: "left-to-right",
-              itemTextColor: appTheme.palette.text.primary,
-              itemOpacity: 0.85,
-              symbolSize: 18,
-            },
-          ]}
+          legends={
+            isDashboard
+              ? []
+              : [
+                  {
+                    anchor: "bottom-left",
+                    direction: "column",
+                    justify: true,
+                    translateX: 20,
+                    translateY: -20,
+                    itemsSpacing: 0,
+                    itemWidth: 94,
+                    itemHeight: 18,
+                    itemDirection: "left-to-right",
+                    itemTextColor: appTheme.palette.text.primary,
+                    itemOpacity: 0.85,
+                    symbolSize: 18,
+                  },
+                ]
+          }
           theme={nivoTheme}
-          projectionScale={150}
+          projectionScale={isDashboard? 70 : 150}
         />
       </Box>
     </>

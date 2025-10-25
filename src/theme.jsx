@@ -10,7 +10,7 @@ export const getDesignTokens = (mode) => ({
             contrastText: "#ffffff",
           },
           secondary: {
-            main: "#E85D8C", 
+            main: "#E85D8C",
             light: "#F18FB1",
             dark: "#C43E6D",
             contrastText: "#ffffff",
@@ -24,6 +24,12 @@ export const getDesignTokens = (mode) => ({
             secondary: "#7A5772",
           },
           divider: "#F3DCE6",
+          warning: {
+            main: "#FFB562",
+            light: "#FFD8A9",
+            dark: "#E9963E",
+            contrastText: "#4A2B00",
+          },
         }
       : {
           primary: {

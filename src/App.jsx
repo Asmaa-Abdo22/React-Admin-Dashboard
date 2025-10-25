@@ -47,21 +47,23 @@ export default function App() {
         { path: "pie", element: <Pie /> },
         { path: "line", element: <LineChart /> },
         { path: "geography", element: <Geography /> },
-      ],
-    },
-    {
+        {
       path: "*",
       element: (
         <Typography
-          component="p"
+          component="h1"
           sx={{
             color: "red",
+            textAlign:"center"
           }}
         >
           404 Page Not Found
         </Typography>
       ),
     },
+      ],
+    },
+    
   ]);
 
   return (
