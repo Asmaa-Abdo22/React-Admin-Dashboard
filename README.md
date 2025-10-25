@@ -1,6 +1,6 @@
 # React + Vite
 
-📊 React Admin Dashboard 
+ ## 📊 React Admin Dashboard 
 - A modern, data-driven admin dashboard that transforms complex data into clear insights, streamlines user operations, and enhances decision-making through real-time analytics and interactive visualizations.
 
  ## 🚀 Live Demo  
