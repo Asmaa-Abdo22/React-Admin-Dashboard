@@ -4,7 +4,7 @@ export const getDesignTokens = (mode) => ({
     ...(mode === "light"
       ? {
           primary: {
-            main: "#5066A3",
+            main: "#1A2A4F",
             light: "#6F82BB",
             dark: "#384C82",
             contrastText: "#ffffff",
