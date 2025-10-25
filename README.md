@@ -17,7 +17,6 @@
 - 📅 **FullCalendar** – Manage and visualize events easily.  
 - ⚡ **Performance Optimized** – Built with Vite for blazing-fast dev experience.  
 - 🧠 **Form Validation** – Using Formik & Yup for robust input validation.  
-- 🔄 **Data Fetching** – Integrated with React Query for caching and state management.  
 - 📱 **Responsive Design** – Perfectly adapts to all screen sizes.
 
 ---
