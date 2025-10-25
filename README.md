@@ -2,11 +2,9 @@
 
 📊 React Admin Dashboard 
 - A modern, data-driven admin dashboard that transforms complex data into clear insights, streamlines user operations, and enhances decision-making through real-time analytics and interactive visualizations.
-- 
----
 
  ## 🚀 Live Demo  
-🔗 [View Demo on Vercel](https://react-addmin-dashboard.netlify.app/) 
+🔗 [View Demo](https://react-addmin-dashboard.netlify.app/) 
 
 ---
 
